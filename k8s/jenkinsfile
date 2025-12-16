@@ -51,7 +51,7 @@ pipeline {
         stage('Deploy to EC2') {
             steps {
                 sshagent(credentials: ['ec2-ssh-credentials']) {
-                    sh """
+                    sh '''
                       ssh -o StrictHostKeyChecking=no $TARGET_EC2_USER@$TARGET_EC2_HOST << EOF
                         docker pull pranathi20222/deploytoec2:latest
                         docker stop my_container || true
@@ -62,7 +62,7 @@ pipeline {
                           -p 80:80 \
                           pranathi20222/deploytoec2:latest
                       EOF
-                    """
+                    '''
                 }
             }
         }
